@@ -16,3 +16,7 @@
 #index_actions{ 
     margin: 10px;
 }
+
+#login_message {
+    color: red;
+}
