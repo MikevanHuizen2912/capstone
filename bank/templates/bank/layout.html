@@ -1,0 +1,15 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Banking application</title>
+    <link href="{% static 'bank/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div class="body">
+        {% block body %}
+        {% endblock %}
+    </div>
+</body>
+</html>
