@@ -1,0 +1,18 @@
+/* The container where all the content of the index is in */
+#index_container{
+    display: flex;
+    flex-direction: column;
+}
+
+/* The seperate divs for the paying and saving accounts */
+#index_paying, #index_saving{
+    border: 1px solid;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* The buttons for banking actions */
+#index_actions{ 
+    margin: 10px;
+}

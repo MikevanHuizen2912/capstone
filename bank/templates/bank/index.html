@@ -1,5 +1,32 @@
 {% extends "bank/layout.html" %}
+{% load static %}
 
 {% block body %}
-<h1>Hello to this website</h1>
+    <div id"index_container">
+        <div id="index_actions">
+            <p>Transfer</p>
+        </div>
+
+        <div id="index_paying">
+            <h2>Paying</h2>
+            <div>
+                <b>Name of the bank account</b>
+                <p>
+                    Name of the user<br>
+                    Number of the account
+                </p>
+            </div>
+        </div>
+
+        <div id="index_saving">
+            <h2>Saving</h2>
+            <div>
+                <b>Name of the bank account</b>
+                <p>
+                    Name of the user<br>
+                    Number of the account
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
