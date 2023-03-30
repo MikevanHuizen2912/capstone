@@ -8,7 +8,7 @@ class User(AbstractUser):
 class Bankaccount(models.Model):
     holder = models.ManyToManyField('User', blank=False, related_name="account")
     name = models.CharField(max_length=50)
-    number= models.CharField(max_length=18)
+    number = models.CharField(max_length=18)
     amount = models.IntegerField()
     type = models.CharField(max_length=4)
     interest = models.IntegerField()
