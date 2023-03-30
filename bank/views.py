@@ -4,6 +4,7 @@ from .models import User, Bankaccount, Transaction
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
+import random
 
 
 # Create your views here.
@@ -47,7 +48,7 @@ def register(request):
             user.save()
         except IntegrityError as e:
             print(e)
-            return render(request, "mail/register.html", {
+            return render(request, "bank/register.html", {
                 "message": "There already exist an account with this mailadress!"
             })
         login(request, user)
@@ -56,4 +57,29 @@ def register(request):
     return render(request, "bank/register.html")
 
 def create_account(request):
+    if request.method == "POST":
+        user = User.objects.get(pk=request.user.id)
+        if request.POST["type"] == "Paying Account":
+            type = "Pay"
+            name = "CS50 Paying Acount"
+            interest = 1
+        elif request.POST["type"] == "Saving Account":
+            type = "Save"
+            name= "CS50 Saving Account"
+            interest = 0
+        amount = int (request.POST["amount"])
+        if amount < 0:
+            return render(request, "bank/create_accoun.html", {
+                "message": "The start amount must be higher then $0"
+            })
+        elif amount > 1000:
+            return render(request, "bank/create_account.html", {
+                    "message": "The start amount must be lower then $1000"
+            })
+        random_number1 = str(random.randint(100000, 999999))
+        number = "CS50W" + random_number1
+        account = Bankaccount(name=name, number=number, amount=amount, type=type, interest=interest)
+        account.save()
+        account.holder.add(user)
+        return HttpResponseRedirect(reverse("index"))
     return render(request, "bank/create_account.html")
