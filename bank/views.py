@@ -80,10 +80,13 @@ def create_account(request):
             return render(request, "bank/create_account.html", {
                     "message": "The start amount must be lower then $1000"
             })
-        random_number1 = str(random.randint(100000, 999999))
-        number = "CS50W" + random_number1
-        account = Bankaccount(name=name, number=number, amount=amount, type=type, interest=interest)
-        account.save()
+        random_number = str(random.randint(100000, 999999))
+        number = "CS50W" + random_number
+        try:
+            account = Bankaccount(name=name, number=number, amount=amount, type=type, interest=interest)
+            account.save()
+        except:
+            create_account(request)
         account.holder.add(user)
         return HttpResponseRedirect(reverse("index"))
     return render(request, "bank/create_account.html")
