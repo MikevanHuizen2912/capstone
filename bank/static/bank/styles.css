@@ -17,6 +17,6 @@
     margin: 10px;
 }
 
-#login_message {
+#login_message, #register_message {
     color: red;
 }

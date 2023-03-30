@@ -1,16 +1,19 @@
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.contrib.auth import authenticate, login, logout
+from .models import User, Bankaccount, Transaction
+from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
+
 
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
         return render(request, "bank/index.html")
     else:
-        return login(request)
+        return login_view(request)
 
-def login(request):
+def login_view(request):
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
@@ -26,4 +29,24 @@ def login(request):
     return render(request, "bank/login.html")
 
 def register(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        password_check = request.POST["password_check"]
+        if password != password_check:
+            render(request, "bank/register.html", {
+                "message": "The password and the password check should be the same!"
+            })
+        
+        try:
+            user = User.objects.create_user(email, email, password)
+            user.save()
+        except IntegrityError as e:
+            print(e)
+            return render(request, "mail/register.html", {
+                "message": "There already exist an account with this mailadress!"
+            })
+        login(request, user)
+        return HttpResponseRedirect(reverse("index"))
+
     return render(request, "bank/register.html")
