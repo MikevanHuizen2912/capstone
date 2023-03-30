@@ -17,6 +17,14 @@
     margin: 10px;
 }
 
+/* The error messages that can happen when logging in or registering */
 #login_message, #register_message {
     color: red;
+}
+
+/* This flexblox helps for the layout of the name and the amount of an account */
+#paying_account_flex, #saving_accoutn_flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
