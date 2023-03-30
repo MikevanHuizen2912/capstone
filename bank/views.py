@@ -93,3 +93,8 @@ def create_account(request):
         account.holder.add(user)
         return HttpResponseRedirect(reverse("index"))
     return render(request, "bank/create_account.html")
+
+def account(request, id):
+    render(request, "bank/account.html", {
+        "account": Bankaccount.objects.get(pk=id)
+    })
