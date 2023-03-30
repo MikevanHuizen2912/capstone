@@ -10,13 +10,15 @@
 
         <div id="index_paying">
             <h2>Paying</h2>
-            <div>
-                <b>Name of the bank account</b>
-                <p>
-                    Name of the user<br>
-                    Number of the account
-                </p>
-            </div>
+            {% for account in paying_accounts %}
+                <div>
+                    <b>{{ account.name }}</b>
+                    <p>
+                        {{ account.holder }}<br>
+                        {{ account.number }}
+                    </p>
+                </div>
+            {% endfor %}
         </div>
 
         <div id="index_saving">

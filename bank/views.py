@@ -10,7 +10,11 @@ import random
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
-        return render(request, "bank/index.html")
+        user = User.objects.get(pk=request.user.id)
+        return render(request, "bank/index.html", {
+            "paying_accounts": user.account.filter(type = "Pay"),
+            "saving_accounts": user.account.filter(type = "Save")
+        })
     else:
         return login_view(request)
 
