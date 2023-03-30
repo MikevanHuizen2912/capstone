@@ -28,6 +28,10 @@ def login_view(request):
 
     return render(request, "bank/login.html")
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("index"))
+
 def register(request):
     if request.method == "POST":
         email = request.POST["email"]
