@@ -50,3 +50,6 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
 
     return render(request, "bank/register.html")
+
+def create_account(request):
+    return render(request, "bank/create_account.html")

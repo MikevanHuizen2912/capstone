@@ -1,0 +1,8 @@
+{% extends "bank/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if message %}
+        <div id="login_message">{{ message }}</div>
+    {% endif %}
+{% endblock %}
