@@ -12,6 +12,7 @@ def index(request):
     if request.user.is_authenticated:
         user = User.objects.get(pk=request.user.id)
         return render(request, "bank/index.html", {
+            "user": user,
             "paying_accounts": user.account.filter(type = "Pay"),
             "saving_accounts": user.account.filter(type = "Save")
         })
@@ -39,6 +40,8 @@ def logout_view(request):
 
 def register(request):
     if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
         email = request.POST["email"]
         password = request.POST["password"]
         password_check = request.POST["password_check"]
@@ -48,7 +51,7 @@ def register(request):
             })
         
         try:
-            user = User.objects.create_user(email, email, password)
+            user = User.objects.create_user(email, email, password, first_name = first_name, last_name = last_name)
             user.save()
         except IntegrityError as e:
             print(e)
@@ -65,7 +68,7 @@ def create_account(request):
         user = User.objects.get(pk=request.user.id)
         if request.POST["type"] == "Paying Account":
             type = "Pay"
-            name = "CS50 Paying Acount"
+            name = "CS50 Paying Account"
             interest = 1
         elif request.POST["type"] == "Saving Account":
             type = "Save"

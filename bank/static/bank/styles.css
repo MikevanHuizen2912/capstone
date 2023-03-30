@@ -23,7 +23,7 @@
 }
 
 /* This flexblox helps for the layout of the name and the amount of an account */
-#paying_account_flex, #saving_accoutn_flex{
+#paying_account_flex, #saving_account_flex{
     display: flex;
     flex-direction: row;
     justify-content: space-between;

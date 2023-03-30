@@ -9,8 +9,16 @@
     <form id="register_form" action="{% url 'register' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
+            <label for="first_name_input">Initials</label>
+            <input class="form-control" id="first_name_input" name="first_name" type="text" placeholder="Enter Initials" autofocus>
+        </div>
+        <div class="form-group">
+            <label for="last_name_input">Last name</label>
+            <input class="form-control" id="last_name_input" name="last_name" type="text" placeholder="Enter Lastname">
+        </div>
+        <div class="form-group">
             <label for="email_input">Email address</label>
-            <input class="form-control" id="email_input" name="email" type="email" placeholder="Enter Email" autofocus>
+            <input class="form-control" id="email_input" name="email" type="email" placeholder="Enter Email">
         </div>
         <div class="form-group">
             <label for="password_input">Password</label>

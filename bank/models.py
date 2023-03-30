@@ -3,7 +3,8 @@ from django.db import models
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 class Bankaccount(models.Model):
     holder = models.ManyToManyField('User', blank=False, related_name="account")
