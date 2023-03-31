@@ -30,4 +30,3 @@ class Transaction(models.Model):
     sender = models.ForeignKey('Bankaccount', on_delete=models.CASCADE, related_name="send_transaction")
     receiver = models.ForeignKey('Bankaccount', on_delete=models.CASCADE, related_name="receive_transaction")
     date = models.DateTimeField()
-

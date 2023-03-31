@@ -4,12 +4,17 @@
 {% block body %}
     <div>
         <h1>{{ account.name }}</h1>
-        <p>{{ account.amount }}</p>
+        <h6>${{ account.amount }}</h6>
+    </div>
+    <div id="account_actions">
+        <h6>Transaction</h6>
+        <h6>Deposit</h6>
+    </div>
+    <div id="account_search">
+        <h6>Search</h6>
     </div>
     <div>
-        Transaction
-        Deposit
-    </div>
-    <div>
+        {% comment %} {% for %}
+        {% endfor %} {% endcomment %}
     </div>
 {% endblock%}

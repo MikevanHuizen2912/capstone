@@ -96,8 +96,11 @@ def create_account(request):
     return render(request, "bank/create_account.html")
 
 def account(request, id):
+    account = Bankaccount.objects.get(pk=id)
+    send_list = account.send_transaction.order_by("-date").all()
+    receive_list = account.send_transaction.order_by("-date").all()
     return render(request, "bank/account.html", {
-        "account": Bankaccount.objects.get(pk=id)
+        "account": account,
     })
 
 def accounts(request):

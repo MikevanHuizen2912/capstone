@@ -7,7 +7,7 @@
 /* The seperate divs for the paying and saving accounts */
 #index_paying, #index_saving{
     border: 1px solid;
-    border-radius: 25px;
+    border-radius: 10px;
     margin: 10px;
     padding: 10px;
 }
@@ -29,7 +29,22 @@
     justify-content: space-between;
 }
 
+/* Formatting voor de href to each account */
 #account_href:link, #account_href:hover, #account_href:visited, #account_href:active{
     color: black;
     text-decoration: none;
+}
+
+/* The format for the search button in the account page */
+#account_search{
+    border: 1px solid;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+#account_actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
