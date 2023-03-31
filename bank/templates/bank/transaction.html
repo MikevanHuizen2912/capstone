@@ -3,22 +3,22 @@
 
 {% block body %}
     {% if message %}
-        <div id="login_message">{{ message }}</div>
+        <div id="transaction_message">{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'create_account' %}" method="POST">
+    <form action="{% url 'transaction' id=account.id %}" method="POST">
         {% csrf_token %}
         <div class="form-group" id="account_type">
-            <label for="account_type">Account type:</label>
-            <select class="form-control" id="account_type_selector" name="type">
-                <option>Paying Account</option>
-                <option>Saving Account</option>
+            <select class="form-control" id="account_selector" name="account">
+                {% for account in user.account.all %}
+                <option>{{ account.name }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="form-group" id="account_amount">
-            <label for="account_amount">Enter a start amount maximal $1000,- </label>
+            <label for="account_amount">Enter an amount</label>
             <input class="form-control" id="account_amount" name="amount" type="number" placeholder="Enter start amount" >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-{% endblock %}
+{% endblock%}

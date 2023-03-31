@@ -103,6 +103,12 @@ def account(request, id):
         "account": account,
     })
 
+def transaction(request, id):
+    account = Bankaccount.objects.get(pk=id)
+    return render(request, "bank/transaction.html", {
+        "account": account
+    })
+
 def accounts(request):
     user = User.objects.get(pk=request.user.id)
     accounts_all = Bankaccount.objects.all()
