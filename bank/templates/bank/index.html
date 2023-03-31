@@ -11,33 +11,41 @@
         <div id="index_paying">
             <h2>Paying</h2>
             {% for account in paying_accounts %}
-                <div id="paying_account{{ account.id }}">
-                    <div id="paying_account_flex">
-                        <b>{{ account.name }}</b>
-                        <b>${{ account.amount }}</b>
+                <a id="account_href" href="{% url 'account' id=account.id %}">
+                    <div id="paying_account{{ account.id }}">
+                        <div id="paying_account_flex">
+                            <b>{{ account.name }}</b>
+                            <b>${{ account.amount }}</b>
+                        </div>
+                        <p>
+                            {{ user }}<br>
+                            {{ account.number }}
+                        </p>
                     </div>
-                    <p>
-                        {{ user }}<br>
-                        {{ account.number }}
-                    </p>
-                </div>
+                </a>
             {% endfor %}
         </div>
 
         <div id="index_saving">
             <h2>Saving</h2>
             {% for account in saving_accounts %}
-                <div id="saving_account{{ account.id }}">
-                    <div id="saving_account_flex">
-                        <b>{{ account.name }}</b>
-                        <b>${{ account.amount }}</b>
+                <a id="account_href" href="{% url 'account' id=account.id %}">
+                    <div id="saving_account{{ account.id }}">
+                        <div id="saving_account_flex">
+                            <b>{{ account.name }}</b>
+                            <b>${{ account.amount }}</b>
+                        </div>
+                        <p>
+                            {{ user }}<br>
+                            {{ account.number }}
+                        </p>
                     </div>
-                    <p>
-                        {{ user }}<br>
-                        {{ account.number }}
-                    </p>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'bank/index.js' %}"></script>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.contrib.auth import authenticate, login, logout
 from .models import User, Bankaccount, Transaction
+from django.http import JsonResponse
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
@@ -95,6 +96,15 @@ def create_account(request):
     return render(request, "bank/create_account.html")
 
 def account(request, id):
-    render(request, "bank/account.html", {
+    return render(request, "bank/account.html", {
         "account": Bankaccount.objects.get(pk=id)
     })
+
+def accounts(request):
+    user = User.objects.get(pk=request.user.id)
+    accounts_all = Bankaccount.objects.all()
+    accounts_list = list()
+    for account in accounts_all:
+        if user in account.holder.all():
+            accounts_list.append(account)
+    return JsonResponse([account.serialize() for account in accounts_list], safe=False)

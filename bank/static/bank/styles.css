@@ -28,3 +28,8 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+#account_href:link, #account_href:hover, #account_href:visited, #account_href:active{
+    color: black;
+    text-decoration: none;
+}
