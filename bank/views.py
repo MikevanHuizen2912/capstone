@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
+from datetime import datetime
 import random
 
 
@@ -103,11 +104,24 @@ def account(request, id):
         "account": account,
     })
 
-def transaction(request, id):
-    account = Bankaccount.objects.get(pk=id)
-    return render(request, "bank/transaction.html", {
-        "account": account
-    })
+def transaction(request):
+    if request.method == "POST":
+        sender = Bankaccount.objects.get(number=request.POST["account"])
+        amount = request.POST["amount"]
+        if amount > sender.amount:
+            return render(request, "bank/transaction.html", {
+                "message": "You cannot transfer more money then that there is in your account"
+            })
+        description = request.POST["description"]
+        date = datetime.now
+        receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
+        transaction = Transaction(amount=amount, description=description, date=date)
+        transaction.save()
+        transaction.sender.add(sender)
+        transaction.receiver.add(receiver)
+        reverse("account", args=(sender.id))
+    
+    return render(request, "bank/transaction.html")
 
 def accounts(request):
     user = User.objects.get(pk=request.user.id)

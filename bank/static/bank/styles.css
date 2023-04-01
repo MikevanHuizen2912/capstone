@@ -18,7 +18,7 @@
 }
 
 /* The error messages that can happen when logging in or registering */
-#login_message, #register_message {
+#message {
     color: red;
 }
 
