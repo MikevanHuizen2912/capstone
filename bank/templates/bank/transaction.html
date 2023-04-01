@@ -11,13 +11,25 @@
         <div class="form-group" id="account_type">
             <select class="form-control" id="account_selector" name="account">
                 {% for account in user.account.all %}
-                <option>{{ account.name }}</option>
+                <option>
+                    {{ account.name }} ${{ account.amount }}<br>
+                    {{ account.number}}
+                </option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group" id="account_amount">
-            <label for="account_amount">Enter an amount</label>
-            <input class="form-control" id="account_amount" name="amount" type="number" placeholder="Enter start amount" >
+            <label for="transaction_amount">Enter an amount</label>
+            <input class="form-control" id="transaction_amount" name="amount" type="number" placeholder="Enter start amount" >
+        </div>
+        <div class="form-group" id="account_amount">
+            <label for="transaction_receiver_name">Receiver</label>
+            <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="Enter the name of the receiver" >
+            <input class="form-control" id="transaction_receiver_number" name="receiver_number" type="text" placeholder="Enter the account number of the receiver" >
+        </div>
+        <div class="form-group" id="account_amount">
+            <label for="transaction_description">Description (max: 100 signs)</label>
+            <input class="form-control" id="transaction_description" name="description" type="text" placeholder="Enter the description" >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
