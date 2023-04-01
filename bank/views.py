@@ -107,19 +107,17 @@ def account(request, id):
 def transaction(request):
     if request.method == "POST":
         sender = Bankaccount.objects.get(number=request.POST["account"])
-        amount = request.POST["amount"]
+        receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
+        amount = int(request.POST["amount"])
         if amount > sender.amount:
             return render(request, "bank/transaction.html", {
                 "message": "You cannot transfer more money then that there is in your account"
             })
         description = request.POST["description"]
-        date = datetime.now
-        receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
-        transaction = Transaction(amount=amount, description=description, date=date)
+        date = datetime.now()
+        transaction = Transaction(amount=amount, description=description, date=date, sender=sender, receiver=receiver) 
         transaction.save()
-        transaction.sender.add(sender)
-        transaction.receiver.add(receiver)
-        reverse("account", args=(sender.id))
+        return HttpResponseRedirect(reverse("account", args=[sender.id]))
     
     return render(request, "bank/transaction.html")
 
