@@ -121,6 +121,8 @@ def transaction(request):
         transaction.save()
         sender.amount = sender.amount - amount
         receiver.amount = receiver.amount + amount
+        sender.save()
+        receiver.save()
         return HttpResponseRedirect(reverse("account", args=[sender.id]))
     
     return render(request, "bank/transaction.html")
