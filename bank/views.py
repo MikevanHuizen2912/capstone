@@ -98,10 +98,12 @@ def create_account(request):
 
 def account(request, id):
     account = Bankaccount.objects.get(pk=id)
-    send_list = account.send_transaction.order_by("-date").all()
-    receive_list = account.send_transaction.order_by("-date").all()
+    send_list = account.send_transaction.all()
+    receive_list = account.receive_transaction.all()
+    transaction_list = send_list | receive_list
     return render(request, "bank/account.html", {
         "account": account,
+        "transactions": transaction_list.order_by("-date").all()
     })
 
 def transaction(request):

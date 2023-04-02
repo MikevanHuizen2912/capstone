@@ -13,8 +13,19 @@
     <div id="account_search">
         <h6>Search</h6>
     </div>
-    <div>
-        {% comment %} {% for %}
-        {% endfor %} {% endcomment %}
+    <div id="account_transactions">
+        {% for transaction in transactions %}
+            <div id="transaction{{ transaction.id }}">
+                <div id="transaction_flex">
+                    <b>{{ transaction.description }}</b>
+                    <b>${{ transaction.amount }}</b>
+                </div>
+                <p>
+                    Sender: {{ transaction.sender.holder }} {{ transaction.sender.number }}<br>
+                    Receiver: {{ transaction.receiver.holder }} {{ transaction.receiver.number }}<br>
+                    Date: {{ transaction.date }}
+                </p>
+            </div>
+        {% endfor %}
     </div>
 {% endblock%}
