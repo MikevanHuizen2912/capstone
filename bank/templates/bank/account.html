@@ -18,7 +18,11 @@
             <div id="transaction{{ transaction.id }}">
                 <div id="transaction_flex">
                     <b>{{ transaction.description }}</b>
-                    <b>${{ transaction.amount }}</b>
+                    {% if account == transaction.sender %}
+                        <b>- ${{ transaction.amount }}</b>
+                    {% elif account == transaction.receiver %}
+                        <b>+ ${{ transaction.amount }}</b>
+                    {% endif %}
                 </div>
                 <p>
                     Sender: {{ transaction.sender.holder }} {{ transaction.sender.number }}<br>

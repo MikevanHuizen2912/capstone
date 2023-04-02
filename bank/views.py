@@ -119,6 +119,8 @@ def transaction(request):
         date = datetime.now()
         transaction = Transaction(amount=amount, description=description, date=date, sender=sender, receiver=receiver) 
         transaction.save()
+        sender.amount = sender.amount - amount
+        receiver.amount = receiver.amount + amount
         return HttpResponseRedirect(reverse("account", args=[sender.id]))
     
     return render(request, "bank/transaction.html")
