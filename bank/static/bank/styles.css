@@ -43,7 +43,7 @@
     padding: 10px;
 }
 
-#account_actions{
+#account_actions, #index_actions{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

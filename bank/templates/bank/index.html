@@ -4,8 +4,8 @@
 {% block body %}
     <div id"index_container">
         <div id="index_actions">
-            <p>Transfer</p>
-            <p>Information</p>
+            <a id="index_transaction" href="{% url 'transaction' %}">Transaction</a>
+            <a id="index_deposit" href="{% url 'deposit' %}">Deposit</a>
         </div>
 
         <div id="index_paying">
