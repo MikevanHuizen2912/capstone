@@ -15,23 +15,23 @@
     </div>
     <div id="account_transactions">
         {% for transaction in transactions %}
-            <div id="transaction{{ transaction.id }}">
-                <div id="transaction_flex">
-                    <b>{{ transaction.description }}</b>
-                    {% if account == transaction.sender %}
-                        <b>- ${{ transaction.amount }}</b>
-                    {% elif account == transaction.receiver %}
-                        <b>+ ${{ transaction.amount }}</b>
-                    {% endif %}
-                </div>
-                <p>
-                    {% if transaction.sender %}
-                        Sender: {{ transaction.sender.holder }} {{ transaction.sender.number }}<br>
-                    {% endif %}
-                    Receiver: {{ transaction.receiver.holder }} {{ transaction.receiver.number }}<br>
-                    Date: {{ transaction.date }}
-                </p>
+            <div class="transaction_flex" id="transaction{{ transaction.id }}">
+                {% if account == transaction.sender %}
+                    <h5><b>{{ transaction.receiver.holder.first }}</b></h5>
+                {% elif account == transaction.receiver %}
+                    <h5><b>{{ transaction.sender.holder.first  }}</b></h5>
+                {% endif %}
+
+                {% if account == transaction.sender %}
+                    <b>- ${{ transaction.amount }}</b>
+                {% elif account == transaction.receiver %}
+                    <b>+ ${{ transaction.amount }}</b>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
 {% endblock%}
+
+{% block script %}
+    <script src="{% static 'bank/account.js' %}"></script>  
+{% endblock %}

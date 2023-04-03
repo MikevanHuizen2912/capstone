@@ -31,3 +31,13 @@ class Transaction(models.Model):
     receiver = models.ForeignKey('Bankaccount', on_delete=models.PROTECT, related_name="receive_transaction")
     amount = models.IntegerField()
     date = models.DateTimeField()
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "sender": self.sender.id,
+            "receiver": self.receiver.id,
+            "amount": self.amount,
+            "date": self.date.strftime("%Y-%m-%d %H:%M:%S")
+        }

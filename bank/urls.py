@@ -13,5 +13,6 @@ urlpatterns = [
     path("account/<int:id>", views.account, name="account"),
 
     #api
-    path("accounts", views.accounts, name="accounts")
+    path("accounts", views.accounts, name="accounts"),
+    path("transactions<int:id>", views.transactions, name="transactions")
 ]

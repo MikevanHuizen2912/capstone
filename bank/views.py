@@ -161,3 +161,14 @@ def accounts(request):
         if user in account.holder.all():
             accounts_list.append(account)
     return JsonResponse([account.serialize() for account in accounts_list], safe=False)
+
+def transactions(request, id):
+    account = Bankaccount.objects.get(pk=id)
+    transactions_all = Transaction.objects.all()
+    transactions_list = list()
+    for transaction in transactions_all:
+        if account in transaction.sender.all():
+            transactions_list.append(account)
+        elif account in transaction.receiver.all():
+            transactions_list.append(account)
+    return JsonResponse([transaction.serialize() for transaction in transactions_list], safe=False)
