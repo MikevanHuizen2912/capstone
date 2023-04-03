@@ -8,17 +8,23 @@
     <div>
         <h1>{{ title }}</h1>
     </div>
-    <form action="{% url 'transaction' %}" method="POST">
+    {% if deposit %}
+        <form action="{% url 'deposit' %}" method="POST">  
+    {% else %}
+        <form action="{% url 'transaction' %}" method="POST">
+    {% endif %}
         {% csrf_token %}
-        <div class="form-group" id="account_type">
-            <select class="form-control" id="account_selector" name="account">
-                {% for account in user.account.all %}
-                <option data-content="{{ account.name }} ${{ account.amount }}<br>{{ account.number}}">
-                    {{ account.number }}
-                </option>
-                {% endfor %}
-            </select>
-        </div>
+        {% if not deposit %}
+            <div class="form-group" id="account_type">
+                <select class="form-control" id="account_selector" name="account">
+                    {% for account in user.account.all %}
+                    <option data-content="{{ account.name }} ${{ account.amount }}<br>{{ account.number}}">
+                        {{ account.number }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}
         <div class="form-group" id="transaction_amount">
             <label for="transaction_amount">
                 {% if deposit %}

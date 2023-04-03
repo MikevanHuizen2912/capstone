@@ -25,7 +25,9 @@
                     {% endif %}
                 </div>
                 <p>
-                    Sender: {{ transaction.sender.holder }} {{ transaction.sender.number }}<br>
+                    {% if transaction.sender %}
+                        Sender: {{ transaction.sender.holder }} {{ transaction.sender.number }}<br>
+                    {% endif %}
                     Receiver: {{ transaction.receiver.holder }} {{ transaction.receiver.number }}<br>
                     Date: {{ transaction.date }}
                 </p>

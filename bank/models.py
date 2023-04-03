@@ -27,7 +27,7 @@ class Bankaccount(models.Model):
 
 class Transaction(models.Model):
     description = models.CharField(max_length=100)
-    sender = models.ForeignKey('Bankaccount', on_delete=models.PROTECT, blank=False, related_name="send_transaction")
+    sender = models.ForeignKey('Bankaccount', on_delete=models.PROTECT, blank=True, null=True, related_name="send_transaction")
     receiver = models.ForeignKey('Bankaccount', on_delete=models.PROTECT, related_name="receive_transaction")
     amount = models.IntegerField()
     date = models.DateTimeField()
