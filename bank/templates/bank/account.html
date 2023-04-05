@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block body %}
+    {{ account.id|json_script:'name' }}
+
     <div>
         <h1>{{ account.name }}</h1>
         <h6>${{ account.amount }}</h6>

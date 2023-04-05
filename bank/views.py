@@ -167,8 +167,8 @@ def transactions(request, id):
     transactions_all = Transaction.objects.all()
     transactions_list = list()
     for transaction in transactions_all:
-        if account in transaction.sender.all():
-            transactions_list.append(account)
-        elif account in transaction.receiver.all():
-            transactions_list.append(account)
+        if account == transaction.sender:
+            transactions_list.append(transaction)
+        elif account == transaction.receiver:
+            transactions_list.append(transaction)
     return JsonResponse([transaction.serialize() for transaction in transactions_list], safe=False)
