@@ -10,6 +10,8 @@ urlpatterns = [
     path("create_account", views.create_account, name="create_account"),
     path("transaction", views.transaction, name="transaction"),
     path("deposit", views.deposit, name="deposit"),
+    path("paying", views.paying, name="paying"),
+    path("saving", views.saving, name="saving"),
     path("account/<int:id>", views.account, name="account"),
 
     #api

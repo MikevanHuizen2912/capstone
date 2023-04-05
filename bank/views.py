@@ -15,11 +15,31 @@ def index(request):
         user = User.objects.get(pk=request.user.id)
         return render(request, "bank/index.html", {
             "user": user,
+            "paying": True,
+            "saving": True,
             "paying_accounts": user.account.filter(type = "Pay"),
             "saving_accounts": user.account.filter(type = "Save")
         })
     else:
         return login_view(request)
+    
+def paying(request):
+    user = User.objects.get(pk=request.user.id)
+    return render(request, "bank/index.html", {
+        "user": user,
+        "paying": True,
+        "saving": False,
+        "paying_accounts": user.account.filter(type = "Pay")
+    })
+
+def saving(request):
+    user = User.objects.get(pk=request.user.id)
+    return render(request, "bank/index.html", {
+        "user": user,
+        "paying": False,
+        "saving": True,
+        "saving_accounts": user.account.filter(type = "Save")
+    })
 
 def login_view(request):
     if request.method == "POST":
