@@ -5,7 +5,7 @@
 }
 
 /* The seperate divs for the paying and saving accounts */
-#index_paying, #index_saving, #account_transactions{
+#index_paying, #index_saving, #account_transactions, .transaction_extra{
     border: 1px solid;
     border-radius: 10px;
     margin: 10px;

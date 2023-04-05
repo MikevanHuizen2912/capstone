@@ -8,7 +8,18 @@ function load_transactions(id){
     .then(response => response.json())
     .then(transactions => {
         transactions.forEach(transaction => {
-            console.log(`${transaction.id}`)
+            document.querySelector(`#transaction${transaction.id}`).addEventListener('click', () => show_extra(transaction.id))
+            document.querySelector(`#transaction_extra${transaction.id}`).style.display = 'none';
         })
     })      
+}
+
+function show_extra(id){
+    document.querySelector(`#transaction_extra${id}`).style.display = 'block';
+    document.querySelector(`#transaction${id}`).addEventListener('click', () => hide_extra(id))
+}
+
+function hide_extra(id){
+    document.querySelector(`#transaction_extra${id}`).style.display = 'none';
+    document.querySelector(`#transaction${id}`).addEventListener('click', () => show_extra(id))
 }
