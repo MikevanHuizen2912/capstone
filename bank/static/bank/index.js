@@ -8,7 +8,6 @@ function load_accounts(){
     .then(accounts => {
         accounts.forEach(account => {
             if(account.type == "Pay"){
-                console.log(`${account.id} + ${account.type}`)
                 document.querySelector(`#paying_account${account.id}`).addEventListener("mouseover", () => {
                     document.querySelector(`#paying_account${account.id}`).style.backgroundColor = "lightgrey"
                 })
@@ -17,7 +16,6 @@ function load_accounts(){
                 })
             }
             else if(account.type == "Save"){
-                console.log(`${account.id} + ${account.type}`)
                 document.querySelector(`#saving_account${account.id}`).addEventListener("mouseover", () => {
                     document.querySelector(`#saving_account${account.id}`).style.backgroundColor = "lightgrey"
                 })

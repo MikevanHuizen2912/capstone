@@ -33,11 +33,20 @@ class Transaction(models.Model):
     date = models.DateTimeField()
 
     def serialize(self):
-        return {
-            "id": self.id,
-            "description": self.description,
-            "sender": self.sender.id,
-            "receiver": self.receiver.id,
-            "amount": self.amount,
-            "date": self.date.strftime("%Y-%m-%d %H:%M:%S")
-        }
+        if self.sender:
+            return {
+                "id": self.id,
+                "description": self.description,
+                "sender": self.sender.id,
+                "receiver": self.receiver.id,
+                "amount": self.amount,
+                "date": self.date.strftime("%Y-%m-%d %H:%M:%S")
+            }
+        else:
+            return {
+                "id": self.id,
+                "description": self.description,
+                "receiver": self.receiver.id,
+                "amount": self.amount,
+                "date": self.date.strftime("%Y-%m-%d %H:%M:%S")
+            }

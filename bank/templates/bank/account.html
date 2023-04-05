@@ -18,10 +18,12 @@
     <div id="account_transactions">
         {% for transaction in transactions %}
             <div class="transaction_flex" id="transaction{{ transaction.id }}">
-                {% if account == transaction.sender %}
+                {% if transaction.sender == none %}
+                    <h5><b>CS50 Bank</b></h5>
+                {% elif account == transaction.sender %}
                     <h5><b>{{ transaction.receiver.holder.first }}</b></h5>
                 {% elif account == transaction.receiver %}
-                    <h5><b>{{ transaction.sender.holder.first  }}</b></h5>
+                    <h5><b>{{ transaction.sender.holder.first }}</b></h5>
                 {% endif %}
 
                 {% if account == transaction.sender %}
@@ -31,7 +33,30 @@
                 {% endif %}
             </div>
             <div class="transaction_extra" id="transaction_extra{{ transaction.id }}">
-                
+                <p>
+                    <b>Contra accountname:</b><br>
+                    {% if transaction.sender == none %}
+                        <span>CS50 Bank</span>
+                    {% elif account == transaction.sender %}
+                        <span>{{ transaction.sender.holder.first }}</span>
+                    {% elif account == transaction.receiver %}
+                        <span>{{ transaction.receiver.holder.first }}</span>
+                    {% endif %}
+                </p>
+                <p>
+                    <b>Contra accountnumber:</b><br>
+                    {% if transaction.sender == none %}
+                        <span>No accountnumber</span>
+                    {% elif account == transaction.sender %}
+                        <span>{{ transaction.sender.number }}</span>
+                    {% elif account == transaction.receiver %}
+                        <span>{{ transaction.receiver.number }}</span>
+                    {% endif %}
+                </p>
+                <div>
+                    <b>Description:</b><br>
+                    <span>{{ transaction.description }}</span>
+                </div>
             </div>
         {% endfor %}
     </div>
