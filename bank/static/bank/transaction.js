@@ -17,7 +17,7 @@ function information_receiver(){
     fetch(`/account/${number}`)
     .then(response => response.json())
     .then(account => {
-        document.querySelector('#transaction_receiver_name').value = `${account.holder}`
+        document.querySelector('#transaction_receiver_name').value = `${account.holder_name}`
     })
 }
 
