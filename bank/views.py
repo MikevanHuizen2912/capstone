@@ -134,7 +134,8 @@ def transaction(request):
         if amount > sender.amount:
             return render(request, "bank/transaction.html", {
                 "message": "You cannot transfer more money then that there is in your account",
-                "title": "Create Transaction"
+                "title": "Create Transaction",
+                "all_accounts": Bankaccount.objects.all()
             })
         description = request.POST["description"]
         date = datetime.now()
@@ -147,7 +148,8 @@ def transaction(request):
         return HttpResponseRedirect(reverse("account", args=[sender.id]))
     
     return render(request, "bank/transaction.html", {
-        "title": "Create Transaction"
+        "title": "Create Transaction",
+        "all_accounts": Bankaccount.objects.all()
     })
 
 def deposit(request):
@@ -170,8 +172,13 @@ def deposit(request):
     
     return render(request, "bank/transaction.html", {
         "deposit": True,
-        "title": "Create Deposit"
+        "title": "Create Deposit",
+        "all_accounts": Bankaccount.objects.all()
     })
+
+def account_information(request, number):
+    account = Bankaccount.objects.get(number=number)
+    return JsonResponse(account.serialize())
 
 def accounts(request):
     user = User.objects.get(pk=request.user.id)

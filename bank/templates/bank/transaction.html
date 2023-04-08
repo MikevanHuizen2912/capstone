@@ -16,9 +16,10 @@
         {% csrf_token %}
         {% if not deposit %}
             <div class="form-group" id="account_type">
+                <label for="account_selector">Sender:</label>
                 <select class="form-control" id="account_selector" name="account">
                     {% for account in user.account.all %}
-                    <option data-content="{{ account.name }} ${{ account.amount }}<br>{{ account.number}}">
+                    <option>
                         {{ account.number }}
                     </option>
                     {% endfor %}
@@ -38,7 +39,14 @@
         <div class="form-group" id="transaction_receiver">
             <label for="transaction_receiver_name">Receiver</label>
             <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="Enter the name of the receiver" >
-            <input class="form-control" id="transaction_receiver_number" name="receiver_number" type="text" placeholder="Enter the account number of the receiver" >
+            <select class="form-control" id="transaction_receiver_number" name="receiver_number" placeholder="Enter the account number of the receiver">
+                {% for account in all_accounts %}
+                <option>
+                    {{ account.number }}
+                </option>
+                {% endfor %}
+                <option value="" disabled selected>Enter the account number of the receiver</option>
+            </select>
         </div>
         <div class="form-group" id="transaction_description">
             <label for="transaction_description">Description (max: 100 signs)</label>
