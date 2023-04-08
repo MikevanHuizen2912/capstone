@@ -8,7 +8,14 @@ function information_sender(){
     fetch(`/account/${number}`)
     .then(response => response.json())
     .then(account => {
-
+        document.querySelector('#transaction_sender_name').value = `${account.holder_name}`
+        document.querySelector('#transaction_sender_amount').value = `$${account.amount}`
+        if(account.type === "Save"){
+            document.querySelector('#transaction_sender_type').value = "Saving Account"
+        } 
+        else if(account.type === "Pay"){
+            document.querySelector('#transaction_sender_type').value = "Paying Account"
+        }  
     })
 }  
 

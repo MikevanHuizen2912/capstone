@@ -23,7 +23,11 @@
                         {{ account.number }}
                     </option>
                     {% endfor %}
+                    <option value="" disabled selected>Select the account number</option>
                 </select>
+                <input class="form-control" id="transaction_sender_name" type="text" placeholder="The name of the account" disabled>
+                <input class="form-control" id="transaction_sender_amount" type="text" placeholder="The amount in the account" disabled>
+                <input class="form-control" id="transaction_sender_type" type="text" placeholder="The type of the account" disabled>
             </div>
         {% endif %}
         <div class="form-group" id="transaction_amount">
@@ -38,15 +42,15 @@
         </div>
         <div class="form-group" id="transaction_receiver">
             <label for="transaction_receiver_name">Receiver</label>
-            <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="Enter the name of the receiver" disabled>
-            <select class="form-control" id="transaction_receiver_number" name="receiver_number" placeholder="Enter the account number of the receiver">
+            <select class="form-control" id="transaction_receiver_number" name="receiver_number">
                 {% for account in all_accounts %}
                 <option>
                     {{ account.number }}
                 </option>
                 {% endfor %}
-                <option value="" disabled selected>Enter the account number of the receiver</option>
+                <option value="" disabled selected>Select the account number of the receiver</option>
             </select>
+            <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="The name of the receiver" disabled>
         </div>
         <div class="form-group" id="transaction_description">
             <label for="transaction_description">Description (max: 100 signs)</label>
