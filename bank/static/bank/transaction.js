@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#account_selector').addEventListener('change', () => information_sender());
+    if(document.querySelector('#account_selector') !== null){
+        document.querySelector('#account_selector').addEventListener('change', () => information_sender());
+    }
     document.querySelector('#transaction_receiver_number').addEventListener('change', () => information_receiver());
 })
 

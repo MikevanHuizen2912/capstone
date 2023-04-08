@@ -4,7 +4,7 @@
 {% block body %}
     {{ account.id|json_script:'name' }}
 
-    <div>
+    <div id="account_name_amount">
         <h1>{{ account.name }}</h1>
         <h6>${{ account.amount }}</h6>
     </div>

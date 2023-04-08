@@ -98,12 +98,14 @@ def create_account(request):
             interest = 0
         amount = int (request.POST["amount"])
         if amount < 0:
-            return render(request, "bank/create_accoun.html", {
-                "message": "The start amount must be higher then $0"
+            return render(request, "bank/create_account.html", {
+                "message": "The start amount must be higher then $0",
+                "users": User.objects.all()
             })
         elif amount > 1000:
             return render(request, "bank/create_account.html", {
-                    "message": "The start amount must be lower then $1000"
+                    "message": "The start amount must be lower then $1000",
+                    "users": User.objects.all()
             })
         random_number = str(random.randint(100000, 999999))
         number = "CS50W" + random_number
@@ -115,7 +117,9 @@ def create_account(request):
             create_account(request)
         account.holder.add(user)
         return HttpResponseRedirect(reverse("index"))
-    return render(request, "bank/create_account.html")
+    return render(request, "bank/create_account.html",{
+        "users": User.objects.all()
+    })
 
 def account(request, id):
     account = Bankaccount.objects.get(pk=id)

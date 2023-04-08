@@ -44,8 +44,14 @@
     padding: 10px;
 }
 
+/* The links for the transaction and deposits */
 #account_actions, #index_actions{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+/* The name and amount of each account */
+#account_name_amount{
+    margin-left: 10px;
 }
