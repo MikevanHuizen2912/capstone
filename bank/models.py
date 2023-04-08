@@ -8,6 +8,7 @@ class User(AbstractUser):
 
 class Bankaccount(models.Model):
     holder = models.ManyToManyField('User', blank=False, related_name="account")
+    holder_name = models.CharField(max_length=150)
     name = models.CharField(max_length=50)
     number = models.CharField(max_length=18, unique=True)
     amount = models.IntegerField()
@@ -18,6 +19,7 @@ class Bankaccount(models.Model):
         return {
             "id": self.id,
             "holder": [user.id for user in self.holder.all()],
+            "holder_name": self.holder_name,
             "name": self.name,
             "number": self.number,
             "amount": self.amount,
