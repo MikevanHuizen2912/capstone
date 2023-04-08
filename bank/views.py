@@ -107,8 +107,9 @@ def create_account(request):
             })
         random_number = str(random.randint(100000, 999999))
         number = "CS50W" + random_number
+        holder_name = user.first_name + user.last_name
         try:
-            account = Bankaccount(name=name, number=number, amount=amount, type=type, interest=interest)
+            account = Bankaccount(name=name, holder_name=holder_name, number=number, amount=amount, type=type, interest=interest)
             account.save()
         except:
             create_account(request)

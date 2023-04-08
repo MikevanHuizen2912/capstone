@@ -21,9 +21,9 @@
                 {% if transaction.sender == none %}
                     <h5><b>CS50 Bank</b></h5>
                 {% elif account == transaction.sender %}
-                    <h5><b>{{ transaction.receiver.holder.first }}</b></h5>
+                    <h5><b>{{ transaction.receiver.holder_name }}</b></h5>
                 {% elif account == transaction.receiver %}
-                    <h5><b>{{ transaction.sender.holder.first }}</b></h5>
+                    <h5><b>{{ transaction.sender.holder_name}}</b></h5>
                 {% endif %}
 
                 {% if account == transaction.sender %}
@@ -38,9 +38,9 @@
                     {% if transaction.sender == none %}
                         <span>CS50 Bank</span>
                     {% elif account == transaction.sender %}
-                        <span>{{ transaction.sender.holder.first }}</span>
+                        <span>{{ transaction.sender.holder_name }}</span>
                     {% elif account == transaction.receiver %}
-                        <span>{{ transaction.receiver.holder.first }}</span>
+                        <span>{{ transaction.receiver.holder_name }}</span>
                     {% endif %}
                 </p>
                 <p>
