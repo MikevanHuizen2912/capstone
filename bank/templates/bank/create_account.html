@@ -17,21 +17,23 @@
         </div>
         <div class="form-group" id="account_amount">
             <label for="account_amount">Enter a start amount maximal $1000,- </label>
-            <input class="form-control" id="account_amount" name="amount" type="number" placeholder="Enter start amount" >
+            <input class="form-control" id="account_amount" name="amount" type="number" placeholder="Enter start amount" required>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="shared_account_checkbox">
+            <input class="form-check-input" type="checkbox" id="shared_account_checkbox" name="shared_checkbox" value="True">
             <label class="form-check-label" for="shared_account_checkbox">Shared Account</label>
         </div>
         <div class="form-group" id="shared_user">
             <label for="account_shared_user">Users:</label>
             <select class="form-control" id="account_shared_user" name="shared_user">
                 {% for user in users %}
-                <option>
-                    {{ user }}
-                </option>
+                    {% if request.user.pk != user.pk %}
+                        <option value="{{ user.pk }}">
+                            {{ user }}
+                        </option>
+                    {% endif %}
                 {% endfor %}
-                <option value="" disabled selected>Select the other user for the shared account</option>
+                <option disabled selected>Select the other user for the shared account</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

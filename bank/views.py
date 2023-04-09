@@ -109,13 +109,24 @@ def create_account(request):
             })
         random_number = str(random.randint(100000, 999999))
         number = "CS50W" + random_number
-        holder_name = user.first_name + user.last_name
+        shared_checkbox = request.POST.get('shared_checkbox', False)
+        if shared_checkbox == 'True':
+            user2 = User.objects.get(pk=request.POST["shared_user"])
+            holder_name = user.last_name + "/" + user2.last_name
+        else:
+            holder_name = user.first_name + user.last_name
+
         try:
             account = Bankaccount(name=name, holder_name=holder_name, number=number, amount=amount, type=type, interest=interest)
             account.save()
         except:
             create_account(request)
+        
         account.holder.add(user)
+        if shared_checkbox == 'True':
+            user2 = User.objects.get(pk=request.POST["shared_user"])
+            account.holder.add(user2)
+            
         return HttpResponseRedirect(reverse("index"))
     return render(request, "bank/create_account.html",{
         "users": User.objects.all()
