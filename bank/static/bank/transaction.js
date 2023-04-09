@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#account_selector').addEventListener('change', () => information_sender());
     }
     document.querySelector('#transaction_receiver_number').addEventListener('change', () => information_receiver());
+    document.querySelector('#transaction_description').addEventListener('input', () => max_signs())
 })
 
 function information_sender(){
@@ -30,3 +31,7 @@ function information_receiver(){
     })
 }
 
+function max_signs(){
+    input = 100 - document.querySelector('#transaction_description').value.length
+    document.querySelector('#label_transaction_description').innerHTML = `Description (max: ${input} signs)`
+}
