@@ -4,8 +4,12 @@
 {% block body %}
     <div id"index_container">
         <div id="index_actions">
-            <a id="index_transaction" href="{% url 'transaction' %}">Transaction</a>
-            <a id="index_deposit" href="{% url 'deposit' %}">Deposit</a>
+            <form action="{% url 'transaction' %}">
+                <button type="submit" class="btn btn-primary btn-rounded">Transaction</button>
+            </form>
+            <form action="{% url 'deposit' %}">
+                <button type="submit" class="btn btn-primary btn-rounded">Deposit</button>
+            </form>
         </div>
 
         {% if paying %}

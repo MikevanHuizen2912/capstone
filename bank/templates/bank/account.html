@@ -9,8 +9,12 @@
         <h5>${{ account.amount }}</h5>
     </div>
     <div id="account_actions">
-        <a id="account_transaction" href="{% url 'transaction' %}"><h6>Transaction</h6></a>
-        <a id="account_deposit" href="{% url 'deposit' %}"><h6>Deposit</h6></a>
+        <form action="{% url 'transaction' %}">
+            <button type="submit" class="btn btn-primary btn-rounded">Transaction</button>
+        </form>
+        <form action="{% url 'deposit' %}">
+            <button type="submit" class="btn btn-primary btn-rounded">Deposit</button>
+        </form>
     </div>
     <div id="account_search">
         <h6>Search</h6>
