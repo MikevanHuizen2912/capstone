@@ -2,62 +2,64 @@
 {% load static %}
 
 {% block body %}
-    {% if message %}
-        <div id="message">{{ message }}</div>
-    {% endif %}
-    <div>
-        <h1>{{ title }}</h1>
-    </div>
-    {% if deposit %}
-        <form action="{% url 'deposit' %}" method="POST">  
-    {% else %}
-        <form action="{% url 'transaction' %}" method="POST">
-    {% endif %}
-        {% csrf_token %}
-        {% if not deposit %}
-            <div class="form-group" id="account_type">
-                <label for="account_selector">Sender:</label>
-                <select class="form-control" id="account_selector" name="account">
-                    {% for account in user.account.all %}
-                    <option>
-                        {{ account.number }}
-                    </option>
-                    {% endfor %}
-                    <option value="" disabled selected>Select the account number</option>
-                </select>
-                <input class="form-control" id="transaction_sender_name" type="text" placeholder="The name of the account" disabled>
-                <input class="form-control" id="transaction_sender_amount" type="text" placeholder="The amount in the account" disabled>
-                <input class="form-control" id="transaction_sender_type" type="text" placeholder="The type of the account" disabled>
-            </div>
+    <div id="transaction_body">
+        <div>
+            <h1>{{ title }}</h1>
+        </div>
+        {% if deposit %}
+            <form action="{% url 'deposit' %}" method="POST">  
+        {% else %}
+            <form action="{% url 'transaction' %}" method="POST">
         {% endif %}
-        <div class="form-group" id="transaction_amount">
-            <label for="transaction_amount">
-                {% if deposit %}
-                    Enter an amount maximal $1000
-                {% else %}
-                    Enter an amount
-                {% endif %}
-            </label>
-            <input class="form-control" id="transaction_amount" name="amount" type="number" placeholder="Enter an amount" required>
-        </div>
-        <div class="form-group" id="transaction_receiver">
-            <label for="transaction_receiver_name">Receiver</label>
-            <select class="form-control" id="transaction_receiver_number" name="receiver_number">
-                {% for account in all_accounts %}
-                <option>
-                    {{ account.number }}
-                </option>
-                {% endfor %}
-                <option value="" disabled selected>Select the account number of the receiver</option>
-            </select>
-            <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="The name of the receiver" disabled>
-        </div>
-        <div class="form-group" id="transaction_description_div">
-            <label for="transaction_description" id="label_transaction_description">Description (max: 100 signs)</label>
-            <input class="form-control" id="transaction_description" name="description" type="text" placeholder="Enter the description" maxlength="100" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            {% csrf_token %}
+            {% if not deposit %}
+                <div class="form-group" id="account_type">
+                    <label for="account_selector">Sender:</label>
+                    <select class="form-control" id="account_selector" name="account">
+                        {% for account in user.account.all %}
+                        <option>
+                            {{ account.number }}
+                        </option>
+                        {% endfor %}
+                        <option value="" disabled selected>Select the account number</option>
+                    </select>
+                    <input class="form-control" id="transaction_sender_name" type="text" placeholder="The name of the account" disabled>
+                    <input class="form-control" id="transaction_sender_amount" type="text" placeholder="The amount in the account" disabled>
+                    <input class="form-control" id="transaction_sender_type" type="text" placeholder="The type of the account" disabled>
+                </div>
+            {% endif %}
+            <div class="form-group" id="transaction_amount">
+                <label for="transaction_amount">
+                    {% if deposit %}
+                        Enter an amount maximal $1000
+                    {% else %}
+                        Enter an amount
+                    {% endif %}
+                </label>
+                <input class="form-control" id="transaction_amount" name="amount" type="number" placeholder="Enter an amount" required>
+            </div>
+            <div class="form-group" id="transaction_receiver">
+                <label for="transaction_receiver_name">Receiver</label>
+                <select class="form-control" id="transaction_receiver_number" name="receiver_number">
+                    {% for account in all_accounts %}
+                        <option>
+                            {{ account.number }}
+                        </option>
+                    {% endfor %}
+                    <option value="" disabled selected>Select the account number of the receiver</option>
+                </select>
+                <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="The name of the receiver" disabled>
+            </div>
+            <div class="form-group" id="transaction_description_div">
+                <label for="transaction_description" id="label_transaction_description">Description (max: 100 signs)</label>
+                <input class="form-control" id="transaction_description" name="description" type="text" placeholder="Enter the description" maxlength="100" required>
+            </div>
+            {% if message %}
+                <div id="message">{{ message }}</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 {% endblock%}   
 
 {% block script %}

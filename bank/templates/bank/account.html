@@ -5,8 +5,8 @@
     {{ account.id|json_script:'name' }}
 
     <div id="account_name_amount">
-        <h1>{{ account.name }}</h1>
-        <h4>${{ account.amount }}</h4>
+        <h2>{{ account.name }}</h2>
+        <h5>${{ account.amount }}</h5>
     </div>
     <div id="account_actions">
         <a id="account_transaction" href="{% url 'transaction' %}"><h6>Transaction</h6></a>
@@ -27,9 +27,9 @@
                 {% endif %}
 
                 {% if account == transaction.sender %}
-                    <b>- ${{ transaction.amount }}</b>
+                    <b id="amount_negative">- ${{ transaction.amount }}</b>
                 {% elif account == transaction.receiver %}
-                    <b>+ ${{ transaction.amount }}</b>
+                    <b id="amount_positive">+ ${{ transaction.amount }}</b>
                 {% endif %}
             </div>
             <div class="transaction_extra" id="transaction_extra{{ transaction.id }}">

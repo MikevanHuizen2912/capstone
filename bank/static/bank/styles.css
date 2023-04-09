@@ -55,3 +55,24 @@
 #account_name_amount{
     margin-left: 10px;
 }
+
+/* All the titles get this color blue */
+h2{
+    color: rgb(51, 102, 255);
+}
+
+/*  Negative transactions get the color red */
+#amount_negative{
+    color: red;
+}
+
+/* Positive transactions get the color green */
+#amount_positive{
+    color: green;
+}
+
+/* The content of the page where you can create a transaction or a deposit */
+#transaction_body, #create_account_body{
+    margin-left: 10px;
+    margin-right: 10px;
+}

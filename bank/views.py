@@ -146,6 +146,12 @@ def transaction(request):
     if request.method == "POST":
         sender = Bankaccount.objects.get(number=request.POST["account"])
         receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
+        if sender == receiver:
+            return render(request, "bank/transaction.html", {
+                "message": "You cannot transfer money to the account where it came from",
+                "title": "Create Transaction",
+                "all_accounts": Bankaccount.objects.all()
+            })
         amount = int(request.POST["amount"])
         if amount > sender.amount:
             return render(request, "bank/transaction.html", {
