@@ -21,7 +21,7 @@
                             {{ account.number }}
                         </option>
                         {% endfor %}
-                        <option value="" disabled selected>Select the account number</option>
+                        <option disabled selected>Select the account number</option>
                     </select>
                     <input class="form-control" id="transaction_sender_name" type="text" placeholder="The name of the account" disabled>
                     <input class="form-control" id="transaction_sender_amount" type="text" placeholder="The amount in the account" disabled>
@@ -46,7 +46,7 @@
                             {{ account.number }}
                         </option>
                     {% endfor %}
-                    <option value="" disabled selected>Select the account number of the receiver</option>
+                    <option disabled selected>Select the account number of the receiver</option>
                 </select>
                 <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="The name of the receiver" disabled>
             </div>

@@ -77,7 +77,13 @@ h2{
     margin-right: 10px;
 }
 
+/* Make all the buttons more round */
 .btn{
     background-color: rgb(51, 102, 255) !important;
     border-radius: 40px !important;
+}
+
+/* Remove the margin of the last section */
+#transaction_description{
+    margin: 0;
 }

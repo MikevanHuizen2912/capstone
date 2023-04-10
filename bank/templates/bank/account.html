@@ -41,9 +41,9 @@
                     <b>Contra accountname:</b><br>
                     {% if transaction.sender == none %}
                         <span>CS50 Bank</span>
-                    {% elif account == transaction.sender %}
-                        <span>{{ transaction.sender.holder_name }}</span>
                     {% elif account == transaction.receiver %}
+                        <span>{{ transaction.sender.holder_name }}</span>
+                    {% elif account == transaction.sender %}
                         <span>{{ transaction.receiver.holder_name }}</span>
                     {% endif %}
                 </p>
@@ -57,10 +57,14 @@
                         <span>{{ transaction.receiver.number }}</span>
                     {% endif %}
                 </p>
-                <div>
+                <p>
+                    <b>Date:</b><br>
+                    <span>{{ transaction.date }}</span>
+                </p>
+                <p id="transaction_description">
                     <b>Description:</b><br>
                     <span>{{ transaction.description }}</span>
-                </div>
+                </p>
             </div>
         {% endfor %}
     </div>
