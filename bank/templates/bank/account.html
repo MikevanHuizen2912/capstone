@@ -24,56 +24,64 @@
             <input class="form-control" id="account_search_input" name="search" type="text" placeholder="Search">
         </div>
     </form>
-
-    <div id="account_transactions">
-        {% for transaction in transactions %}
-            <div class="transaction_flex" id="transaction{{ transaction.id }}">
-                {% if transaction.sender == none %}
-                    <h5><b>CS50 Bank</b></h5>
-                {% elif account == transaction.sender %}
-                    <h5><b>{{ transaction.receiver.holder_name }}</b></h5>
-                {% elif account == transaction.receiver %}
-                    <h5><b>{{ transaction.sender.holder_name}}</b></h5>
-                {% endif %}
-
-                {% if account == transaction.sender %}
-                    <b id="amount_negative">- ${{ transaction.amount }}</b>
-                {% elif account == transaction.receiver %}
-                    <b id="amount_positive">+ ${{ transaction.amount }}</b>
-                {% endif %}
-            </div>
-            <div class="transaction_extra" id="transaction_extra{{ transaction.id }}">
-                <p>
-                    <b>Contra accountname:</b><br>
-                    {% if transaction.sender == none %}
-                        <span>CS50 Bank</span>
-                    {% elif account == transaction.receiver %}
-                        <span>{{ transaction.sender.holder_name }}</span>
-                    {% elif account == transaction.sender %}
-                        <span>{{ transaction.receiver.holder_name }}</span>
-                    {% endif %}
-                </p>
-                <p>
-                    <b>Contra accountnumber:</b><br>
-                    {% if transaction.sender == none %}
-                        <span>No accountnumber</span>
-                    {% elif account == transaction.sender %}
-                        <span>{{ transaction.sender.number }}</span>
-                    {% elif account == transaction.receiver %}
-                        <span>{{ transaction.receiver.number }}</span>
-                    {% endif %}
-                </p>
-                <p>
-                    <b>Date:</b><br>
-                    <span>{{ transaction.date }}</span>
-                </p>
-                <p id="transaction_description">
-                    <b>Description:</b><br>
-                    <span>{{ transaction.description }}</span>
-                </p>
-            </div>
-        {% endfor %}
-    </div>
+    
+        {% regroup transaction_list by date.day as transactions %}
+            {% for group in transactions %}
+                <div id="account_transactions">
+                    <h4 id="transaction_date">{{ group.list.0.date|date:"d M Y" }}</h4>
+                    {% for transaction in group.list %}
+                        {% if not forloop.first %}
+                            <hr id="account_line">
+                        {% endif %}
+                        <div class="transaction_flex" id="transaction{{ transaction.id }}">
+                            {% if transaction.sender == none %}
+                                <h6><b>CS50 Bank</b></h6>
+                            {% elif account == transaction.sender %}
+                                <h6><b>{{ transaction.receiver.holder_name }}</b></h6>
+                            {% elif account == transaction.receiver %}
+                                <h6><b>{{ transaction.sender.holder_name}}</b></h6>
+                            {% endif %}
+            
+                            {% if account == transaction.sender %}
+                                <b id="amount_negative">- ${{ transaction.amount }}</b>
+                            {% elif account == transaction.receiver %}
+                                <b id="amount_positive">+ ${{ transaction.amount }}</b>
+                            {% endif %}
+                        </div>
+                        <div class="transaction_extra" id="transaction_extra{{ transaction.id }}">
+                            <p>
+                                <b>Contra accountname:</b><br>
+                                {% if transaction.sender == none %}
+                                    <span>CS50 Bank</span>
+                                {% elif account == transaction.receiver %}
+                                    <span>{{ transaction.sender.holder_name }}</span>
+                                {% elif account == transaction.sender %}
+                                    <span>{{ transaction.receiver.holder_name }}</span>
+                                {% endif %}
+                            </p>
+                            <p>
+                                <b>Contra accountnumber:</b><br>
+                                {% if transaction.sender == none %}
+                                    <span>No accountnumber</span>
+                                {% elif account == transaction.sender %}
+                                    <span>{{ transaction.sender.number }}</span>
+                                {% elif account == transaction.receiver %}
+                                    <span>{{ transaction.receiver.number }}</span>
+                                {% endif %}
+                            </p>
+                            <p>
+                                <b>Date:</b><br>
+                                <span>{{ transaction.date }}</span>
+                            </p>
+                            <p id="transaction_description">
+                                <b>Description:</b><br>
+                                <span>{{ transaction.description }}</span>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+    
 {% endblock%}
 
 {% block script %}

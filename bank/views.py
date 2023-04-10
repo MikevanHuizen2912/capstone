@@ -139,7 +139,7 @@ def account(request, id):
     transaction_list = send_list | receive_list
     return render(request, "bank/account.html", {
         "account": account,
-        "transactions": transaction_list.order_by("-date").all()
+        "transaction_list": transaction_list.order_by("-date").all()
     })
 
 def transaction(request):
@@ -206,6 +206,7 @@ def search(request, id):
         receive_list = account.receive_transaction.all()
         transaction_list = send_list | receive_list
         transaction_list.order_by("-date").all()
+        
         searched_list = list()
         for transaction in transaction_list:
             if transaction.sender is None:
@@ -222,7 +223,7 @@ def search(request, id):
 
         return render(request, "bank/account.html", {
             "account": account,
-            "transactions": searched_list
+            "transaction_list": searched_list
         })
 
 def account_information(request, number):

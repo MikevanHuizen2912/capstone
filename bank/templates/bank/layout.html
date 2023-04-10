@@ -23,8 +23,8 @@
           {% if request.user.is_authenticated %}
           <div class="collapse navbar-collapse" id="navbar_items">
             <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
