@@ -36,14 +36,6 @@
     text-decoration: none;
 }
 
-/* The format for the search button in the account page */
-#account_search{
-    border: 1px solid;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-}
-
 /* The links for the transaction and deposits */
 #account_actions, #index_actions{
     display: flex;
@@ -86,4 +78,15 @@ h2{
 /* Remove the margin of the last section */
 #transaction_description{
     margin: 0;
+}
+
+/* The box with the inputbar to search in it */
+#account_search{
+    margin: 10px;
+}
+
+/* The inputbar to search itself */
+#account_search_input{
+    border: 1px solid black !important;
+    border-radius: 10px;
 }

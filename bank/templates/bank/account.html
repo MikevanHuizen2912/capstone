@@ -8,6 +8,7 @@
         <h2>{{ account.name }}</h2>
         <h5>${{ account.amount }}</h5>
     </div>
+
     <div id="account_actions">
         <form action="{% url 'transaction' %}">
             <button type="submit" class="btn btn-primary btn-rounded">Transaction</button>
@@ -16,9 +17,14 @@
             <button type="submit" class="btn btn-primary btn-rounded">Deposit</button>
         </form>
     </div>
-    <div id="account_search">
-        <h6>Search</h6>
-    </div>
+
+    <form id="account_search" action="{% url 'search' id=account.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" id="account_search_input" name="search" type="text" placeholder="Search">
+        </div>
+    </form>
+
     <div id="account_transactions">
         {% for transaction in transactions %}
             <div class="transaction_flex" id="transaction{{ transaction.id }}">

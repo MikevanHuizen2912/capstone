@@ -13,6 +13,7 @@ urlpatterns = [
     path("paying", views.paying, name="paying"),
     path("saving", views.saving, name="saving"),
     path("account/<int:id>", views.account, name="account"),
+    path("search/<int:id>", views.search, name="search"),
 
     #api
     path("accounts", views.accounts, name="accounts"),

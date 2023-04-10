@@ -198,6 +198,33 @@ def deposit(request):
         "all_accounts": Bankaccount.objects.all()
     })
 
+def search(request, id):
+    if request.method == "POST":
+        input = request.POST["search"]
+        account = Bankaccount.objects.get(pk=id)
+        send_list = account.send_transaction.all()
+        receive_list = account.receive_transaction.all()
+        transaction_list = send_list | receive_list
+        transaction_list.order_by("-date").all()
+        searched_list = list()
+        for transaction in transaction_list:
+            if transaction.sender is None:
+                if input in "CS50 Bank":
+                    searched_list.append(transaction)
+            elif input in transaction.sender.holder_name:
+                searched_list.append(transaction)
+            elif input in transaction.receiver.holder_name:
+                searched_list.append(transaction)
+            elif input in transaction.description:
+                searched_list.append(transaction)
+
+        searched_list.reverse()
+
+        return render(request, "bank/account.html", {
+            "account": account,
+            "transactions": searched_list
+        })
+
 def account_information(request, number):
     account = Bankaccount.objects.get(number=number)
     return JsonResponse(account.serialize())
