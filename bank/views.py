@@ -207,6 +207,7 @@ def search(request, id):
         transaction_list = send_list | receive_list
         transaction_list.order_by("-date").all()
         
+        input = input.strip()
         searched_list = list()
         for transaction in transaction_list:
             if transaction.sender is None:
