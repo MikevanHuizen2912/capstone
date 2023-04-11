@@ -114,7 +114,7 @@ def create_account(request):
             user2 = User.objects.get(pk=request.POST["shared_user"])
             holder_name = user.last_name + "/" + user2.last_name
         else:
-            holder_name = user.first_name + user.last_name
+            holder_name = user.first_name + " " + user.last_name
 
         try:
             account = Bankaccount(name=name, holder_name=holder_name, number=number, amount=amount, type=type, interest=interest)
@@ -220,7 +220,7 @@ def search(request, id):
                 searched_set.add(transaction)
             if input in str(transaction.amount):
                 searched_set.add(transaction)
-                
+
         searched_list = list(searched_set)
         searched_list.reverse()
 
