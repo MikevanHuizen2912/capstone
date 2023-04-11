@@ -142,23 +142,40 @@ def account(request, id):
         "transaction_list": transaction_list.order_by("-date").all()
     })
 
-def transaction(request):
+def transaction(request, id=None):
     if request.method == "POST":
         sender = Bankaccount.objects.get(number=request.POST["account"])
         receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
         if sender == receiver:
-            return render(request, "bank/transaction.html", {
-                "message": "You cannot transfer money to the account where it came from",
-                "title": "Create Transaction",
-                "all_accounts": Bankaccount.objects.all()
-            })
+            if id is not None:
+                return render(request, "bank/transaction.html", {
+                    "account": Bankaccount.objects.get(pk=id),
+                    "message": "You cannot make a transaction to the same account",
+                    "title": "Create Transaction",
+                    "all_accounts": Bankaccount.objects.all()
+                })
+            else:
+                return render(request, "bank/transaction.html", {
+                    "message": "You cannot make a transaction to the same account",
+                    "title": "Create Transaction",
+                    "all_accounts": Bankaccount.objects.all()
+                })
+
         amount = int(request.POST["amount"])
         if amount > sender.amount:
-            return render(request, "bank/transaction.html", {
-                "message": "You cannot transfer more money then that there is in your account",
-                "title": "Create Transaction",
-                "all_accounts": Bankaccount.objects.all()
-            })
+            if id is not None:
+                return render(request, "bank/transaction.html", {
+                    "account": Bankaccount.objects.get(pk=id),
+                    "message": "You cannot transfer more money then that there is in your account",
+                    "title": "Create Transaction",
+                    "all_accounts": Bankaccount.objects.all()
+                })
+            else:
+                return render(request, "bank/transaction.html", {
+                    "message": "You cannot transfer more money then that there is in your account",
+                    "title": "Create Transaction",
+                    "all_accounts": Bankaccount.objects.all()
+                })
         description = request.POST["description"]
         date = datetime.now()
         transaction = Transaction(amount=amount, description=description, date=date, sender=sender, receiver=receiver) 
@@ -169,21 +186,36 @@ def transaction(request):
         receiver.save()
         return HttpResponseRedirect(reverse("account", args=[sender.id]))
     
-    return render(request, "bank/transaction.html", {
-        "title": "Create Transaction",
-        "all_accounts": Bankaccount.objects.all()
-    })
+    if id is not None:
+        return render(request, "bank/transaction.html", {
+            "account": Bankaccount.objects.get(pk=id),
+            "title": "Create Transaction",
+            "all_accounts": Bankaccount.objects.all()
+        })
+    else:
+        return render(request, "bank/transaction.html", {
+            "title": "Create Transaction",
+            "all_accounts": Bankaccount.objects.all()
+        })
 
-def deposit(request):
+def deposit(request, id=None):
     if request.method == "POST":
         receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
         amount = int(request.POST["amount"])
         if amount > 1000:
-            return render(request, "bank/transaction.html", {
-                "message": "You cannot deposit more then $1000",
-                "deposit": True,
-                "title": "Create Deposit"
-            })
+            if id is not None:
+                return render(request, "bank/transaction.html", {
+                    "account": Bankaccount.objects.get(pk=id),
+                    "message": "You cannot deposit more then $1000",
+                    "deposit": True,
+                    "title": "Create Deposit"
+                })
+            else:
+                return render(request, "bank/transaction.html", {
+                    "message": "You cannot deposit more then $1000",
+                    "deposit": True,
+                    "title": "Create Deposit"
+                })
         description = request.POST["description"]
         date = datetime.now()
         transaction = Transaction(amount=amount, description=description, date=date, receiver=receiver) 
@@ -192,11 +224,19 @@ def deposit(request):
         receiver.save()
         return HttpResponseRedirect(reverse("account", args=[receiver.id]))
     
-    return render(request, "bank/transaction.html", {
-        "deposit": True,
-        "title": "Create Deposit",
-        "all_accounts": Bankaccount.objects.all()
-    })
+    if id is not None:
+        return render(request, "bank/transaction.html", {
+            "account": Bankaccount.objects.get(pk=id),
+            "deposit": True,
+            "title": "Create Deposit",
+            "all_accounts": Bankaccount.objects.all()
+        })
+    else:
+        return render(request, "bank/transaction.html", {
+            "deposit": True,
+            "title": "Create Deposit",
+            "all_accounts": Bankaccount.objects.all()
+        })
 
 def search(request, id):
     if request.method == "POST":

@@ -10,10 +10,10 @@
     </div>
 
     <div id="account_actions">
-        <form action="{% url 'transaction' %}">
+        <form action="{% url 'transaction' id=account.id %}">
             <button type="submit" class="btn btn-primary btn-rounded">Transaction</button>
         </form>
-        <form action="{% url 'deposit' %}">
+        <form action="{% url 'deposit' id=account.id %}">
             <button type="submit" class="btn btn-primary btn-rounded">Deposit</button>
         </form>
     </div>
