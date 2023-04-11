@@ -205,21 +205,23 @@ def search(request, id):
         send_list = account.send_transaction.all()
         receive_list = account.receive_transaction.all()
         transaction_list = send_list | receive_list
-        transaction_list.order_by("-date").all()
         
         input = input.strip()
-        searched_list = list()
+        searched_set = set()
         for transaction in transaction_list:
             if transaction.sender is None:
                 if input in "CS50 Bank":
-                    searched_list.append(transaction)
+                    searched_set.add(transaction)
             elif input in transaction.sender.holder_name:
-                searched_list.append(transaction)
-            elif input in transaction.receiver.holder_name:
-                searched_list.append(transaction)
-            elif input in transaction.description:
-                searched_list.append(transaction)
-
+                searched_set.add(transaction)
+            if input in transaction.receiver.holder_name:
+                searched_set.add(transaction)
+            if input in transaction.description:
+                searched_set.add(transaction)
+            if input in str(transaction.amount):
+                searched_set.add(transaction)
+                
+        searched_list = list(searched_set)
         searched_list.reverse()
 
         return render(request, "bank/account.html", {
