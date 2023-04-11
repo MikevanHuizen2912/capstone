@@ -15,7 +15,7 @@
             {% if not deposit %}
                 <div class="form-group" id="account_type">
                     <label for="account_selector">Sender:</label>
-                    <select class="form-control" id="account_selector" name="account" {% if account is not None %} disabled {% endif %}>
+                    <select class="form-control" id="account_selector" name="sender_number" {% if account is not None %} readonly {% endif %}>
                         {% if account is None %}
                             {% for accounts in user.account.all %}
                                 <option>
@@ -60,6 +60,13 @@
                             {% endfor %}
                             <option disabled selected>Select the account number of the receiver</option>
                         {% endif %}
+                    {% else %}
+                        {% for accounts in all_accounts %}
+                            <option>
+                                {{ accounts.number }}
+                            </option>
+                        {% endfor %}
+                        <option disabled selected>Select the account number of the receiver</option>
                     {% endif %}
                 </select>
                 <input class="form-control" id="transaction_receiver_name" name="receiver_name" type="text" placeholder="The name of the receiver" disabled>

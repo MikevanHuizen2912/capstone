@@ -144,7 +144,7 @@ def account(request, id):
 
 def transaction(request, id=None):
     if request.method == "POST":
-        sender = Bankaccount.objects.get(number=request.POST["account"])
+        sender = Bankaccount.objects.get(number=request.POST["sender_number"])
         receiver = Bankaccount.objects.get(number=request.POST["receiver_number"])
         if sender == receiver:
             if id is not None:
@@ -247,21 +247,25 @@ def search(request, id):
         transaction_list = send_list | receive_list
         
         input = input.strip()
-        searched_set = set()
+        searched_list = list()
         for transaction in transaction_list:
             if transaction.sender is None:
                 if input in "CS50 Bank":
-                    searched_set.add(transaction)
+                    searched_list.append(transaction)
+                    continue
             elif input in transaction.sender.holder_name:
-                searched_set.add(transaction)
+                searched_list.append(transaction)
+                continue
             if input in transaction.receiver.holder_name:
-                searched_set.add(transaction)
+                searched_list.append(transaction)
+                continue
             if input in transaction.description:
-                searched_set.add(transaction)
-            if input in str(transaction.amount):
-                searched_set.add(transaction)
-
-        searched_list = list(searched_set)
+                searched_list.append(transaction)
+                continue
+            if input in "$" + str(transaction.amount):
+                searched_list.append(transaction)
+                continue
+        
         searched_list.reverse()
 
         return render(request, "bank/account.html", {
