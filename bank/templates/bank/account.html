@@ -64,9 +64,9 @@
                                 {% if transaction.sender == none %}
                                     <span>No accountnumber</span>
                                 {% elif account == transaction.sender %}
-                                    <span>{{ transaction.sender.number }}</span>
-                                {% elif account == transaction.receiver %}
                                     <span>{{ transaction.receiver.number }}</span>
+                                {% elif account == transaction.receiver %}
+                                    <span>{{ transaction.sender.number }}</span>
                                 {% endif %}
                             </p>
                             <p>
