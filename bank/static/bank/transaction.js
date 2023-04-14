@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     if(document.querySelector('#account_selector') !== null){
+        if(document.querySelector('#account_selector').getAttribute('disabled') && document.querySelector('#transaction_receiver_number').getAttribute('disabled')){
+            document.querySelector('#transaction_submit').addEventListener('submit', () => {
+                document.querySelector('#account_selector').removeAttribute("disabled");
+                document.querySelector('#transaction_receiver_number').removeAttribute("disabled");
+            })
+        }
+    }
+
+    if(document.querySelector('#account_selector') !== null){
         document.querySelector('#account_selector').addEventListener('change', () => information_sender());
         if(document.querySelector('#account_selector').value !== "Select the account number"){
             information_sender()

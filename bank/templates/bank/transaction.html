@@ -15,7 +15,7 @@
             {% if not deposit %}
                 <div class="form-group" id="account_type">
                     <label for="account_selector">Sender:</label>
-                    <select class="form-control" id="account_selector" name="sender_number" {% if account is not None %} readonly {% endif %}>
+                    <select class="form-control" id="account_selector" name="sender_number" {% if account is not None %} disabled {% endif %}>
                         {% if account is None %}
                             {% for accounts in user.account.all %}
                                 <option>
@@ -78,7 +78,7 @@
             {% if message %}
                 <div id="message">{{ message }}</div>
             {% endif %}
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="transaction_submit" type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 {% endblock%}   
