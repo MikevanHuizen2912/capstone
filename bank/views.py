@@ -245,7 +245,7 @@ def search(request, id):
         send_list = account.send_transaction.all()
         receive_list = account.receive_transaction.all()
         transaction_list = send_list | receive_list
-        
+
         input = input.strip()
         searched_list = list()
         for transaction in transaction_list:
@@ -257,7 +257,7 @@ def search(request, id):
                 searched_list.append(transaction)
                 continue
             if input in transaction.receiver.holder_name:
-                searched_list.append(transaction)
+                searched_list.append(transaction)   
                 continue
             if input in transaction.description:
                 searched_list.append(transaction)
@@ -266,6 +266,7 @@ def search(request, id):
                 searched_list.append(transaction)
                 continue
         
+        searched_list.sort(key=lambda r: r.date)
         searched_list.reverse()
 
         return render(request, "bank/account.html", {
