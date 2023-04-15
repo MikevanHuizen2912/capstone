@@ -253,10 +253,10 @@ def search(request, id):
                 if input in "CS50 Bank":
                     searched_list.append(transaction)
                     continue
-            elif input in transaction.sender.holder_name:
+            elif input in transaction.sender.holder_name and account != transaction.sender:
                 searched_list.append(transaction)
                 continue
-            if input in transaction.receiver.holder_name:
+            if input in transaction.receiver.holder_name and account != transaction.receiver:
                 searched_list.append(transaction)   
                 continue
             if input in transaction.description:
