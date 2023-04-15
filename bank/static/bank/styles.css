@@ -63,8 +63,8 @@ h2{
     color: green;
 }
 
-/* The content of the page where you can create a transaction or a deposit */
-#transaction_body, #create_account_body{
+/* Give all the forms a 10px margin on the left and right */
+#transaction_body, #create_account_body, #login_form, #register_form{
     margin-left: 10px;
     margin-right: 10px;
 }
