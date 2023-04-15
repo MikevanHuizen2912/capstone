@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    if(document.querySelector('#account_selector') !== null){
-        console.log('hello1')
-        document.querySelector('#transaction_submit').addEventListener('click', () => {
-            console.log('hello2')
+    document.querySelector('#transaction_submit').addEventListener('click', () => {
+        if(document.querySelector('#account_selector') !== null){
             document.querySelector('#account_selector').disabled = false;
-            document.querySelector('#transaction_receiver_number').disabled = false;
-        })
-    }
+        }
+        document.querySelector('#transaction_receiver_number').disabled = false;
+    })
 
     if(document.querySelector('#account_selector') !== null){
         document.querySelector('#account_selector').addEventListener('change', () => information_sender());
