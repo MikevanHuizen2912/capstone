@@ -102,3 +102,63 @@ h2{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/* The header when you are on mobile */
+#mobile_header{
+    background-color: #f8f9fa; 
+}
+
+/* The horizontal lines in the header for mobile */
+#mobile_hr{
+    margin: 0px;
+}
+
+.appear{
+    animation-name: appear;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+.disappear{
+    animation-name: disappear;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+    }
+    75% {
+        opacity: 0;
+        height: 100%;
+        line-height: 100%;
+    }
+    100% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+    }     
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 1;
+        height: 100%;
+        line-height: 100%;
+    }
+    75% {
+        opacity: 0;
+        height: 100%;
+        line-height: 100%;
+    }
+    100% {
+        opacity: 0;
+        height: 0px;
+        line-height: 0px;
+    }     
+}
