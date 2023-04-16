@@ -113,16 +113,9 @@ h2{
     margin: 0px;
 }
 
-.appear{
+#appear{
     animation-name: appear;
-    animation-duration: 2s;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-}
-
-.disappear{
-    animation-name: disappear;
-    animation-duration: 2s;
+    animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-play-state: paused;
 }
@@ -145,6 +138,13 @@ h2{
     }     
 }
 
+#disappear{
+    animation-name: disappear;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+
 @keyframes disappear {
     0% {
         opacity: 1;
@@ -158,7 +158,7 @@ h2{
     }
     100% {
         opacity: 0;
-        height: 0px;
-        line-height: 0px;
+        line-height:0;
+        height: 0;
     }     
 }

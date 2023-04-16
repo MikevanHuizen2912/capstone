@@ -45,16 +45,18 @@
         </nav>
     </header>
 
-    <header class="appear disappear" id="mobile_header">
+    <header id="mobile_header">
         {% if request.user.is_authenticated %}
-          <div>
-            <hr id="mobile_hr">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
-            <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
-            <a class="nav-link" href="{% url 'paying' %}">Paying</a>
-            <a class="nav-link" href="{% url 'saving' %}">Saving</a>
-            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
-            <hr id="mobile_hr">
+          <div id="disappear">
+            <div id="appear">
+              <hr id="mobile_hr">
+              <a class="nav-link" href="{% url 'index' %}">Home</a>
+              <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
+              <a class="nav-link" href="{% url 'paying' %}">Paying</a>
+              <a class="nav-link" href="{% url 'saving' %}">Saving</a>
+              <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+              <hr id="mobile_hr">
+            </div>
           </div>
           {% endif %}
     </header>
