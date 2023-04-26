@@ -9,3 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }    
     })
 })
+
+window.addEventListener('resize', () => {
+    if(document.querySelector('.navbar-toggler').display === 'none'){
+        document.querySelector('#mobile_header').style.display = 'none';
+    }
+})
