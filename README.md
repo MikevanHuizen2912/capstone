@@ -8,7 +8,9 @@ The user can make transactions between different bank accounts. These transactio
 
 # Distinctiveness and Complexity
 
-I think my project satisfies the distinctiveness and complexity requirement. The application uses Django on the back end and has 3 data models. It also includes Javascript on the front-end. My website is also mobile responsive because all the pages will shrink according to the size of the device. The header also changes into a fold-out menu if the screen is too small to have it displayed normally. Because of this I think my project is sufficiently distinct from the other projects. The project has interactions between users with transactions from one account to another. what makes it different from the other projects.
+I think my project satisfies the distinctiveness and complexity requirement. The application uses Django on the back end and has 3 data models. It also includes Javascript on the front-end. My website is also mobile responsive because all the pages will shrink according to the size of the device. The header also changes into a fold-out menu if the screen is too small to have it displayed normally. In the project I also use all the programming languages that are used in the course. In this project I also used new concepts like the Group by in the HTMl Template and new Javascript functions and events. I also used Bootstrap to make the header and all the forms.
+
+I think the project is also destinctive enough from the other projects in this course. This is because with this project I had to build it from scratch. You also had to come up with the idea and the design for the website yourself. That's why I found this a very interesting project to make!
 
 # File contents:
 
